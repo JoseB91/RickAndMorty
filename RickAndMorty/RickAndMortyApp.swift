@@ -10,6 +10,13 @@ import SwiftData
 
 @main
 struct RickAndMortyApp: App {
+    
+    private let composer: Composer
+    
+    init() {
+        self.composer = Composer.makeComposer()
+    }
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -25,7 +32,7 @@ struct RickAndMortyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CharactersView(charactersViewModel: composer.composeCharactersViewModel())
         }
         .modelContainer(sharedModelContainer)
     }
