@@ -1,5 +1,5 @@
 //
-//  CharactersMapperTets.swift
+//  CharactersMapperTests.swift
 //  RickAndMortyTests
 //
 //  Created by José Briones on 26/6/25.
@@ -9,7 +9,8 @@ import Foundation
 import Testing
 @testable import RickAndMorty
 
-struct CharactersMapperTets {
+@Suite("CharactersMapper Tests")
+struct CharactersMapperTests {
     
     @Test("Map delivers items on 200 HTTP response with JSON items")
     func mapDeliversItemsOn200HTTPResponseWithJSONItems() throws {

@@ -9,6 +9,7 @@ import Foundation
 import Testing
 import RickAndMorty
 
+@Suite("CharactersEndpoint Tests")
 struct CharactersEndpointTests {
     
     @Test()

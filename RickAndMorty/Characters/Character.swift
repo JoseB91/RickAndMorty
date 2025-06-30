@@ -21,5 +21,4 @@ public struct Character: Identifiable, Equatable {
         self.location = location
         self.image = image
     }
-
 }
