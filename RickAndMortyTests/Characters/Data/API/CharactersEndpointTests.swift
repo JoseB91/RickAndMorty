@@ -31,7 +31,7 @@ struct CharactersEndpointTests {
         ("host", "rickandmortyapi.com"),
         ("path", "/api/character")
     ])
-    func urlComponents(component: String, expected: String) {
+    func getURLComponents(component: String, expected: String) {
         let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
         let url = CharactersEndpoint.getCharacters.url(baseURL: baseURL)
         

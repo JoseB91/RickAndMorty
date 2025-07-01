@@ -47,13 +47,12 @@ struct URLSessionHTTPClientTests : ~Copyable{
     @Test("GET request throws error on non-HTTP response")
     func getFromURL_throwsErrorOnNonHTTPResponse() async {
         let sut = makeSUT()
-        
-        URLProtocolStub.response = URLResponse()
-        URLProtocolStub.data = anyData()
+
+        URLProtocolStub.error = URLError(.badServerResponse)
         
         await #expect(throws: URLError.self) {
             _ = try await sut.get(from: anyURL())
-        }
+        } 
     }
     
     private func makeSUT(sourceLocation: SourceLocation = #_sourceLocation) -> HTTPClient {
