@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 class Composer {
     private let baseURL: URL
@@ -29,7 +30,21 @@ class Composer {
                         httpClient: httpClient)
     }
     
-//    private static func makeStore() -> CountriesStore {
+    private static func makeStore() -> CharactersStore {
+        
+        var sharedModelContainer: ModelContainer = {
+            let schema = Schema([
+                LocalCharacter.self,
+            ])
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+            do {
+                return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            } catch {
+                fatalError("Could not create ModelContainer: \(error)")
+            }
+        }()
+        
 //        do {
 //            return try CoreDataCountriesAppStore(
 //                storeURL: NSPersistentContainer
@@ -38,7 +53,7 @@ class Composer {
 //        } catch {
 //            return InMemoryStore()
 //        }
-//    }
+    }
     
     func composeCharactersViewModel() -> CharactersViewModel {
         let charactersLoader: () async throws -> [Character] = { [baseURL, httpClient] in
