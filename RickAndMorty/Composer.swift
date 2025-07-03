@@ -11,57 +11,48 @@ import SwiftData
 class Composer {
     private let baseURL: URL
     private let httpClient: URLSessionHTTPClient
-    //private let localCountriesLoader: LocalCountriesLoader
+    private let localCharactersLoader: LocalCharactersLoader
     
-    init(baseURL: URL, httpClient: URLSessionHTTPClient) {
+    init(baseURL: URL, httpClient: URLSessionHTTPClient, localCharactersLoader: LocalCharactersLoader) {
         self.baseURL = baseURL
         self.httpClient = httpClient
-        //        self.localCountriesLoader = localCountriesLoader
+        self.localCharactersLoader = localCharactersLoader
     }
     
     static func makeComposer() -> Composer {
         
         let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
         let httpClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-        //        let store = makeStore()
-        //        let localCountriesLoader = LocalCountriesLoader(store: store, currentDate: Date.init)
-        
+        let store = makeStore()
+        let localCharactersLoader = LocalCharactersLoader(store: store, currentDate: Date.init)
         return Composer(baseURL: baseURL,
-                        httpClient: httpClient)
+                        httpClient: httpClient,
+                        localCharactersLoader: localCharactersLoader)
     }
     
     private static func makeStore() -> CharactersStore {
-        
-        var sharedModelContainer: ModelContainer = {
-            let schema = Schema([
-                LocalCharacter.self,
-            ])
-            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-            do {
-                return try ModelContainer(for: schema, configurations: [modelConfiguration])
-            } catch {
-                fatalError("Could not create ModelContainer: \(error)")
-            }
-        }()
-        
-//        do {
-//            return try CoreDataCountriesAppStore(
-//                storeURL: NSPersistentContainer
-//                    .defaultDirectoryURL()
-//                    .appendingPathComponent("countries-app-store.sqlite"))
-//        } catch {
-//            return InMemoryStore()
-//        }
+        do {
+            return try SwiftDataStore()
+        } catch {
+            return InMemoryStore()
+        }
     }
     
     func composeCharactersViewModel() -> CharactersViewModel {
-        let charactersLoader: () async throws -> [Character] = { [baseURL, httpClient] in
+        let charactersLoader: () async throws -> [Character] = { [baseURL, httpClient, localCharactersLoader] in
             
-            let url = CharactersEndpoint.getCharacters.url(baseURL: baseURL)
-            let (data, response) = try await httpClient.get(from: url)
-            
-            return try CharactersMapper.map(data, from: response)
+            do {
+                return try await localCharactersLoader.load()
+            } catch {
+                let url = CharactersEndpoint.getCharacters.url(baseURL: baseURL)
+                let (data, response) = try await httpClient.get(from: url)
+                
+                let characters = try CharactersMapper.map(data, from: response)
+                
+                try? await localCharactersLoader.save(characters)
+                
+                return characters
+            }
         }
         
         return CharactersViewModel(charactersLoader: charactersLoader)

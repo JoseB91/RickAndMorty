@@ -8,20 +8,21 @@
 import SwiftData
 import Foundation
 
-@Model
-public class LocalCharacter {
+@preconcurrency @Model
+public final class LocalCharacter: Sendable {
     @Attribute(.unique)
-    var id: Int
+    public var id: Int
     
     var name: String
     var origin: String
     var location: String
+    var data: Data?
     var image: URL
     
     @Relationship(inverse: \LocalCache.characters)
     var cache: LocalCache?
 
-    init(id: Int, name: String, origin: String, location: String, image: URL) {
+    init(id: Int, name: String, origin: String, location: String, data: Data? = nil, image: URL) {
         self.id = id
         self.name = name
         self.origin = origin

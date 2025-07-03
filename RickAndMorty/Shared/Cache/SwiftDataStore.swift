@@ -8,12 +8,12 @@
 import SwiftData
 import Foundation
 
-public final class SwiftDataStore {
+public actor SwiftDataStore {
     public let container: ModelContainer
     public let context: ModelContext
 
     public enum StoreError: Error {
-        case failedToLoadModel(Error)
+        case failedToLoadContainer(Error)
     }
 
     public init() throws {
@@ -22,14 +22,13 @@ public final class SwiftDataStore {
             LocalCache.self
         ])
 
-        let configuration: ModelConfiguration
-        configuration = ModelConfiguration(schema: schema)
+        let configuration = ModelConfiguration(schema: schema)
 
         do {
             container = try ModelContainer(for: schema, configurations: [configuration])
             context = ModelContext(container)
         } catch {
-            throw StoreError.failedToLoadModel(error)
+            throw StoreError.failedToLoadContainer(error)
         }
     }
 }

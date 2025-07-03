@@ -9,7 +9,7 @@ import SwiftData
 import Foundation
 
 @Model
-class LocalCache {
+public final class LocalCache {
     var timestamp: Date
 
     @Relationship(deleteRule: .cascade)
@@ -21,15 +21,11 @@ class LocalCache {
     }
     
     static func find(in context: ModelContext) throws -> LocalCache? {
-        return try context.fetch(FetchDescriptor<LocalCache>()).first
+        let descriptor = FetchDescriptor<LocalCache>()
+        return try context.fetch(descriptor).first
     }
-    
+        
     static func deleteCache(in context: ModelContext) throws {
         try find(in: context).map(context.delete).map(context.save)
     }
-    
-    static func cacheExists(in context: ModelContext) throws -> Bool {
-        try find(in: context) != nil
-    }
 }
-
