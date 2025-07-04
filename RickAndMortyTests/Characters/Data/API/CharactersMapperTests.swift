@@ -27,24 +27,24 @@ struct CharactersMapperTests {
         #expect(result == [item])
     }
     
-    @Test("Map throws error on non-200 HTTP response", arguments: [199, 201, 300, 400, 500])
+    @Test("Map throws unsuccessfully response error on non-200 HTTP response", arguments: [199, 201, 300, 400, 500])
     func mapThrowsErrorOnNon200HTTPResponse(statusCode: Int) throws {
         // Arrange
         let json = "".makeJSON()
         
         // Act & Assert
-        #expect(throws: (any Error).self) {
+        #expect(throws: MapperError.unsuccessfullyResponse.self) {
             try CharactersMapper.map(json, from: HTTPURLResponse(statusCode: statusCode))
         }
     }
     
-    @Test("Map throws error on 200 HTTP response with invalid JSON")
+    @Test("Map throws decoding error on 200 HTTP response with invalid JSON")
     func mapThrowsErrorOn200HTTPResponseWithInvalidJSON() {
         // Arrange
         let invalidJSON = Data("invalid json".utf8)
         
         // Act & Assert
-        #expect(throws: (any Error).self) {
+        #expect(throws: DecodingError.self) {
             try CharactersMapper.map(invalidJSON, from: HTTPURLResponse(statusCode: 200))
         }
     }

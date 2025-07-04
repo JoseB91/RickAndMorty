@@ -28,3 +28,13 @@ extension InMemoryStore: CharactersStore {
         }
     }
 }
+
+extension InMemoryStore: ImageStore {
+    public func insert(_ data: Data, for url: URL) async throws {
+    }
+    
+    public func retrieve(dataFor url: URL) async throws -> Data? {
+        nil
+    }
+    
+}

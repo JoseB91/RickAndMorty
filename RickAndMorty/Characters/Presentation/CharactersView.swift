@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CharactersView: View {
     @State var charactersViewModel: CharactersViewModel
-    //@Binding var navigationPath: NavigationPath
-
+    let imageView: (URL) -> ImageView
+    
     var body: some View {
         ZStack {
             if charactersViewModel.isLoading {
@@ -20,9 +20,9 @@ struct CharactersView: View {
                 ScrollView {
                     ForEach(charactersViewModel.characters) { character in
                         Button {
-                            //navigationPath.append(Character.officialName)
                         } label: {
-                            CharacterCardView(character: character)
+                            CharacterCardView(character: character,
+                                              imageView: imageView)
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
@@ -45,13 +45,13 @@ struct CharactersView: View {
     }
 }
 
-#Preview {
-    let charactersViewModel = CharactersViewModel(
-        charactersLoader: MockCharactersViewModel.mockcharactersLoader
-    )
-    
-    NavigationStack {
-        CharactersView(charactersViewModel: charactersViewModel)
-                      //navigationPath: .constant(NavigationPath())
-    }
-}
+//#Preview {
+//    let charactersViewModel = CharactersViewModel(
+//        charactersLoader: MockCharactersViewModel.mockcharactersLoader
+//    )
+//    
+//    NavigationStack {
+//        CharactersView(charactersViewModel: charactersViewModel,
+//        imageView: )
+//    }
+//}

@@ -29,4 +29,26 @@ public final class LocalCharacter: Sendable {
         self.location = location
         self.image = image
     }
+    
+    static func getImageData(with url: URL, in context: ModelContext) throws -> Data? {
+        if let cachedData = URLImageCache.shared.getImageData(for: url) {
+            return cachedData
+        }
+
+        if let character = try getFirst(with: url, in: context), let imageData = character.data {
+            URLImageCache.shared.setImageData(imageData, for: url)
+            return imageData
+        }
+        
+        return nil
+    }
+    
+    static func getFirst(with url: URL, in context: ModelContext) throws -> LocalCharacter? {
+        var descriptor = FetchDescriptor<LocalCharacter>()
+        descriptor.predicate = #Predicate<LocalCharacter> { character in
+            url == character.image
+        }
+        descriptor.fetchLimit = 1
+        return try context.fetch(descriptor).first
+    }
 }

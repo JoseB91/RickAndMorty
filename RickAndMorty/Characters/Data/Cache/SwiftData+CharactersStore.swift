@@ -10,13 +10,13 @@ import Foundation
 
 extension SwiftDataStore: CharactersStore {    
     public func retrieve() async throws -> CachedCharacters? {
-        try LocalCache.find(in: context).map {
+        try LocalCache.find(in: modelContext).map {
             CachedCharacters(characters: $0.characters, timestamp: $0.timestamp)
         }
     }
     
     public func insert(_ characters: [LocalCharacter], timestamp: Date) async throws {
-        guard try context.fetch(FetchDescriptor<LocalCache>()).isEmpty else {
+        guard try modelContext.fetch(FetchDescriptor<LocalCache>()).isEmpty else {
             return
         }
         
@@ -27,11 +27,11 @@ extension SwiftDataStore: CharactersStore {
         }
         
         let cache = LocalCache(timestamp: timestamp, characters: characters)
-        context.insert(cache)
-        try context.save()
+        modelContext.insert(cache)
+        try modelContext.save()
     }
     
     public func deleteCache() async throws {
-        try LocalCache.deleteCache(in: context)
+        try LocalCache.deleteCache(in: modelContext)
     }
 }

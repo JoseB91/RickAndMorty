@@ -9,11 +9,13 @@ import SwiftUI
 
 struct CharacterCardView: View {
     let character: Character
+    let imageView: (URL) -> ImageView
     
     var body: some View {
         HStack(spacing: 16) {
             // Flag section
-            ImageView(url: character.image)
+            imageView(character.image)
+                .frame(width: 96, height: 48)
                 .frame(width: 80, height: 80)
             
             // Info section
@@ -32,10 +34,10 @@ struct CharacterCardView: View {
     }
 }
 
-#Preview {
-    let character = MockCharactersViewModel.mockCharacter()
-    CharacterCardView(character: character)
-}
+//#Preview {
+//    let character = MockCharactersViewModel.mockCharacter()
+//    CharacterCardView(character: character)
+//}
 
 struct CardModifier: ViewModifier {
     func body(content: Content) -> some View {

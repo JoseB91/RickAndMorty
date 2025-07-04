@@ -19,8 +19,8 @@ struct RickAndMortyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CharactersView(charactersViewModel: composer.composeCharactersViewModel())
+            CharactersView(charactersViewModel: composer.composeCharactersViewModel(),
+                           imageView: composer.composeImageView)
         }
-        //.modelContainer(sharedModelContainer)
     }
 }
