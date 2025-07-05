@@ -8,32 +8,14 @@
 import Foundation
 import SwiftData
 
-class Composer {
-    private let baseURL: URL
-    private let httpClient: URLSessionHTTPClient
-    private let localCharactersStorage: LocalCharactersStorage
-    private let localImageStorage: LocalImageStorage
-    
-    init(baseURL: URL, httpClient: URLSessionHTTPClient, localCharactersStorage: LocalCharactersStorage, localImageStorage: LocalImageStorage) {
-        self.baseURL = baseURL
-        self.httpClient = httpClient
-        self.localCharactersStorage = localCharactersStorage
-        self.localImageStorage = localImageStorage
-    }
-    
-    static func makeComposer() -> Composer {
-        
-        let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
-        let httpClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-        let store = makeStore()
-        let localCharactersStorage = LocalCharactersStorage(store: store, currentDate: Date.init)
-        let localImageStorage = LocalImageStorage(store: store)
-        return Composer(baseURL: baseURL,
-                        httpClient: httpClient,
-                        localCharactersStorage: localCharactersStorage,
-                        localImageStorage: localImageStorage)
-    }
-    
+struct Dependencies {
+    let baseURL: URL
+    let httpClient: URLSessionHTTPClient
+    let localCharactersStorage: LocalCharactersStorage
+    let localImageStorage: LocalImageStorage
+}
+
+extension Dependencies {
     private static func makeStore() -> CharactersStore & ImageStore {
         do {
             let schema = Schema([
@@ -49,19 +31,42 @@ class Composer {
             return InMemoryStore()
         }
     }
+    
+    static func makeDependencies() -> Dependencies {
+        let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
+        let httpClient = URLSessionHTTPClient(session: .init(configuration: .ephemeral))
+        let store = makeStore()
+        let localCharactersStorage = LocalCharactersStorage(store: store, currentDate: Date.init)
+        let localImageStorage = LocalImageStorage(store: store)
 
+        return Dependencies(
+            baseURL: baseURL,
+            httpClient: httpClient,
+            localCharactersStorage: localCharactersStorage,
+            localImageStorage: localImageStorage
+        )
+    }
+}
+
+class Composer {
+    private let dependencies: Dependencies
+    
+    init(dependencies: Dependencies) {
+        self.dependencies = dependencies
+    }
+    
     func composeCharactersViewModel() -> CharactersViewModel {
-        let repository = CharactersRepositoryImpl(baseURL: baseURL,
-                                                  httpClient: httpClient,
-                                                  localCharactersStorage: localCharactersStorage)
+        let repository = CharactersRepositoryImpl(baseURL: dependencies.baseURL,
+                                                  httpClient: dependencies.httpClient,
+                                                  localCharactersStorage: dependencies.localCharactersStorage)
                 
         return CharactersViewModel(repository: repository)
     }
     
     func composeImageView(with url: URL) -> ImageView {
         let repository = ImageRepositoryImpl(url: url,
-                                             httpClient: httpClient,
-                                             localImageStorage: localImageStorage)
+                                             httpClient: dependencies.httpClient,
+                                             localImageStorage: dependencies.localImageStorage)
 
         let imageViewModel = ImageViewModel(repository: repository)
 

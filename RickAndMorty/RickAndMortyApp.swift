@@ -14,13 +14,13 @@ struct RickAndMortyApp: App {
     private let composer: Composer
     
     init() {
-        self.composer = Composer.makeComposer()
+        self.composer = Composer(dependencies: Dependencies.makeDependencies())
     }
-
+    
     var body: some Scene {
         WindowGroup {
             CharactersView(charactersViewModel: composer.composeCharactersViewModel())
-            .environment(\.imageViewLoader, composer.composeImageView)
+                .environment(\.imageViewLoader, composer.composeImageView)
         }
     }
 }

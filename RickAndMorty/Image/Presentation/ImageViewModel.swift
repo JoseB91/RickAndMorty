@@ -25,7 +25,7 @@ final class ImageViewModel {
         do {
             data = try await repository.loadImage()
         } catch {
-            print(error) //TODO: Decide here what to do
+            // Error handled by fallback of Image.load
         }
         
         isLoading = false
