@@ -9,16 +9,16 @@ import SwiftUI
 
 struct CharacterCardView: View {
     let character: Character
-    let imageView: (URL) -> ImageView
-    
+    @Environment(\.imageViewLoader) private var imageViewLoader
+
     var body: some View {
         HStack(spacing: 16) {
-            // Flag section
-            imageView(character.image)
-                .frame(width: 96, height: 48)
-                .frame(width: 80, height: 80)
+
+            if let imageViewLoader{
+                imageViewLoader(character.image)
+                    .frame(width: 80, height: 80)
+            }
             
-            // Info section
             VStack(alignment: .leading, spacing: 2) {
                 Text(character.name)
                     .font(.headline)
@@ -34,23 +34,10 @@ struct CharacterCardView: View {
     }
 }
 
-//#Preview {
-//    let character = MockCharactersViewModel.mockCharacter()
-//    CharacterCardView(character: character)
-//}
+#Preview {
+    let character = MockCharactersViewModel.mockCharacter()
+    let mockImageComposer = MockImageComposer()
 
-struct CardModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding()
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(radius: 4)
-    }
-}
-
-extension View {
-    func cardStyle() -> some View {
-        self.modifier(CardModifier())
-    }
+    CharacterCardView(character: character)
+        .environment(\.imageViewLoader, mockImageComposer.composeImageView)
 }

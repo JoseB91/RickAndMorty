@@ -5,44 +5,53 @@
 //  Created by José Briones on 3/7/25.
 //
 
-import UIKit
+import SwiftUI
 
 @Observable
-final class ImageViewModel<Image> {
-    private let imageLoader: () async throws -> Data
-    private let imageTransformer: (Data) -> Image?
+final class ImageViewModel {
+    private let repository: ImageRepository
     
     var isLoading = false
-    var image: UIImage = UIImage.init()
+    var data = Data()
     
-    init(imageLoader: @escaping () async throws -> Data, imageTransformer: @escaping (Data) -> Image?) {
-        self.imageLoader = imageLoader
-        self.imageTransformer = imageTransformer
+    init(repository: ImageRepository) {
+        self.repository = repository
     }
     
     @MainActor
     func loadImage() async {
         isLoading = true
-        defer { isLoading = false }
         
         do {
-            let dataImage = try await imageLoader()
-            image = try UIImage.tryMake(data: dataImage)
+            data = try await repository.loadImage()
         } catch {
-            image = UIImage(systemName: "photo") ?? UIImage()
+            print(error) //TODO: Decide here what to do
         }
+        
         isLoading = false
     }
     
 }
 
-extension UIImage {
-    struct InvalidImageData: Error {}
-    
-    static func tryMake(data: Data) throws -> UIImage {
-        guard let image = UIImage(data: data) else {
-            throw InvalidImageData()
+final class MockImageRepository: ImageRepository {
+    func loadImage() async throws -> Data {
+        Data()
+    }
+}
+
+struct MockImageComposer {
+    func composeImageView(with url: URL) -> ImageView {
+        let mockRepository = MockImageRepository()
+        let mockViewModel = ImageViewModel(repository: mockRepository)
+        return ImageView(imageViewModel: mockViewModel)
+    }
+}
+
+extension Image {
+    static func load(from data: Data, fallback: String = "photo") -> Image {
+        guard let uiImage = UIImage(data: data) else {
+            return Image(systemName: fallback)
         }
-        return image
+        return Image(uiImage: uiImage)
     }
 }

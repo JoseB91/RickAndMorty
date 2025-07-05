@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CharactersView: View {
     @State var charactersViewModel: CharactersViewModel
-    let imageView: (URL) -> ImageView
-    
+    @Environment(\.imageViewLoader) private var imageViewLoader
+
     var body: some View {
         ZStack {
             if charactersViewModel.isLoading {
@@ -21,8 +21,7 @@ struct CharactersView: View {
                     ForEach(charactersViewModel.characters) { character in
                         Button {
                         } label: {
-                            CharacterCardView(character: character,
-                                              imageView: imageView)
+                            CharacterCardView(character: character)
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
@@ -35,23 +34,23 @@ struct CharactersView: View {
             await charactersViewModel.loadCharacters()
         }
         .navigationTitle("Rick and Morty")
-        .alert(item: $charactersViewModel.errorMessage) { error in
+        .alert(item: $charactersViewModel.errorMessage) { errorModel in
             Alert(
                 title: Text("Error"),
-                message: Text(error.message),
+                message: Text(errorModel.message),
                 dismissButton: .default(Text("OK"))
             )
         }
     }
 }
 
-//#Preview {
-//    let charactersViewModel = CharactersViewModel(
-//        charactersLoader: MockCharactersViewModel.mockcharactersLoader
-//    )
-//    
-//    NavigationStack {
-//        CharactersView(charactersViewModel: charactersViewModel,
-//        imageView: )
-//    }
-//}
+#Preview {
+    
+    NavigationStack {
+        let mockImageComposer = MockImageComposer()
+        let charactersViewModel = CharactersViewModel(repository: MockCharactersRepository())
+        
+        CharactersView(charactersViewModel: charactersViewModel)
+            .environment(\.imageViewLoader, mockImageComposer.composeImageView)
+    }
+}

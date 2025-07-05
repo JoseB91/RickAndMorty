@@ -15,10 +15,10 @@ final class CharactersViewModel {
     var isLoading = false
     var errorMessage: ErrorModel? = nil
     
-    private let charactersLoader: () async throws -> [Character]
+    private let repository: CharactersRepository
     
-    init(charactersLoader: @escaping () async throws -> [Character]) {
-        self.charactersLoader = charactersLoader
+    init(repository: CharactersRepository) {
+        self.repository = repository
     }
     
     @MainActor
@@ -26,7 +26,7 @@ final class CharactersViewModel {
         isLoading = true
         
         do {
-            characters = try await charactersLoader()
+            characters = try await repository.loadCharacters()
         } catch {
             errorMessage = ErrorModel(message: "Failed to load characters: \(error.localizedDescription)")
         }
@@ -35,7 +35,7 @@ final class CharactersViewModel {
     }
 }
 
-final class MockCharactersViewModel {
+struct MockCharactersViewModel {
     static func mockCharacter() -> Character {
         return Character(id: 1,
                          name: "Rick Sanchez",
@@ -43,13 +43,10 @@ final class MockCharactersViewModel {
                          location: "Citadel of Ricks",
                          image: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!)
     }
-    
-    static func mockcharactersLoader() async throws -> [Character] {
-        return [mockCharacter()]
-    }
 }
 
-struct ErrorModel: Identifiable {
-    let id = UUID()
-    let message: String
+struct MockCharactersRepository: CharactersRepository {
+    func loadCharacters() async throws -> [Character] {
+        [MockCharactersViewModel.mockCharacter()]
+    }
 }
