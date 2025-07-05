@@ -14,7 +14,7 @@ struct RickAndMortyApp: App {
     private let composer: Composer
     
     init() {
-        self.composer = Composer(dependencies: Dependencies.makeDependencies())
+        self.composer = Composer.makeComposer()
     }
     
     var body: some Scene {
