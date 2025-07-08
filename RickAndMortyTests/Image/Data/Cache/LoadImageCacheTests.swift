@@ -24,8 +24,8 @@ struct LoadImageCacheTests {
         #expect(store.receivedMessages == [.retrieve])
     }
         
-    @Test("Load delivers Stored Data On Successful Result")
-    func loadDeliversStoredDataOnSuccessfulResult() async {
+    @Test("Load delivers stored data on successful load")
+    func loadDeliversStoredDataOnSuccessfulLoad() async {
         // Arrange
         let data = anyData()
         let (sut, store) = makeSUT()
@@ -36,8 +36,8 @@ struct LoadImageCacheTests {
         })
     }
             
-    @Test("Load fails with NotFoundError")
-    func loadFailsWithNotFoundError() async {
+    @Test("Load fails with NotFoundError on not found data")
+    func loadFailsWithNotFoundErrorOnNotFoundData() async {
         // Arrange
         let (sut, store) = makeSUT()
 
@@ -47,8 +47,8 @@ struct LoadImageCacheTests {
         })
     }
         
-    @Test("Load fails with FailedError")
-    func loadFailsWithFailedError() async {
+    @Test("Load fails with FailedError on load error")
+    func loadFailsWithFailedErrorOnLoadError() async {
         // Arrange
         let (sut, store) = makeSUT()
         
