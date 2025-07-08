@@ -36,15 +36,7 @@ class Composer {
     
     private static func makeStore() -> CharactersStore & ImageStore {
         do {
-            let schema = Schema([
-                LocalCharacter.self,
-                LocalCache.self
-            ])
-
-            let configuration = ModelConfiguration(schema: schema)
-            let modelContainer = try ModelContainer(for: schema, configurations: [configuration])
-            
-            return SwiftDataStore(modelContainer: modelContainer)
+            return try SwiftDataStore(isStoredInMemoryOnly: false)
         } catch {
             return InMemoryStore()
         }

@@ -10,7 +10,6 @@ import Testing
 @testable import RickAndMorty
 
 @Suite("InMemory Characters Tests")
-
 struct InMemoryCharactersStoreTests: CharactersStoreSpecs {
     
     @Test("Insert delivers no empty cache")
@@ -69,6 +68,5 @@ struct InMemoryCharactersStoreTests: CharactersStoreSpecs {
         let sut = InMemoryStore()
         return sut
     }
-
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
+//TODO: change to struct
 final class CachePolicy {
     private init() {}
     
