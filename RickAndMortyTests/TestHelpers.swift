@@ -38,6 +38,12 @@ func mockCharacters() -> (models: [Character], local: [LocalCharacter]) {
     return (models, local)
 }
 
+func mockOtherCharacters() -> (models: [Character], local: [LocalCharacter]) {
+    let models = [MockCharactersViewModel.mockAnotherCharacter()]
+    let local = models.toLocal()
+    return (models, local)
+}
+
 extension Date {
     func adding(seconds: TimeInterval) -> Date {
         return self + seconds
