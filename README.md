@@ -1,6 +1,6 @@
 ## App Architecture
 
-![Rick and Morty Architecture](LigasEc_Architecture.png)
+![Rick and Morty Architecture](RickAndMorty_Architecture.png)
 
 ---
 

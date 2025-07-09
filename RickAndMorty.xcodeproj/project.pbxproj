@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B0D7040C2E1EDAC7009C6201 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B0D7040B2E1EDAC7009C6201 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		B093CF2F2E0DE6E1006E4F9C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -20,6 +24,7 @@
 		B093CF1D2E0DE6DF006E4F9C /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B093CF2E2E0DE6E1006E4F9C /* RickAndMortyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RickAndMortyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B093D1A42E123E2A006E4F9C /* RickAndMorty.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RickAndMorty.xctestplan; sourceTree = "<group>"; };
+		B0D7040B2E1EDAC7009C6201 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -69,6 +74,7 @@
 		B093CF142E0DE6DF006E4F9C = {
 			isa = PBXGroup;
 			children = (
+				B0D7040B2E1EDAC7009C6201 /* README.md */,
 				B093D1A42E123E2A006E4F9C /* RickAndMorty.xctestplan */,
 				B093CF1F2E0DE6DF006E4F9C /* RickAndMorty */,
 				B093CF312E0DE6E1006E4F9C /* RickAndMortyTests */,
@@ -177,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D7040C2E1EDAC7009C6201 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
