@@ -33,7 +33,7 @@ final class ImageViewModel {
     
 }
 
-final class MockImageRepository: ImageRepository {
+struct MockImageRepository: ImageRepository {
     func loadImage() async throws -> Data {
         Data()
     }

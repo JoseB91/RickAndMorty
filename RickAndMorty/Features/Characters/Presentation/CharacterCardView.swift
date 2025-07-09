@@ -33,10 +33,9 @@ struct CharacterCardView: View {
     }
 }
 
-//#Preview {
-//    let character = MockCharactersViewModel.mockCharacter()
-//    let mockImageComposer = MockImageComposer()
-//
-//    CharacterCardView(character: character)
-//        .environment(\.imageViewLoader, mockImageComposer.composeImageView)
-//}
+#Preview {
+    let character = MockCharactersViewModel.mockCharacter()
+
+    CharacterCardView(character: character,
+    imageViewLoader: MockImageComposer().composeImageView)
+}

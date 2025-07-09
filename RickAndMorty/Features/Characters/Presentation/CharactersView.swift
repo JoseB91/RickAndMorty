@@ -11,7 +11,7 @@ struct CharactersView: View {
     @State var charactersViewModel: CharactersViewModel
     let imageViewLoader: (URL) -> ImageView
     //@Environment(\.imageViewLoader) private var imageViewLoader
-
+    
     var body: some View {
         ZStack {
             if charactersViewModel.isLoading {
@@ -45,13 +45,12 @@ struct CharactersView: View {
     }
 }
 
-//#Preview {
-//    
-//    NavigationStack {
-//        let mockImageComposer = MockImageComposer()
-//        let charactersViewModel = CharactersViewModel(repository: MockCharactersRepository())
-//        
-//        CharactersView(charactersViewModel: charactersViewModel)
-//            .environment(\.imageViewLoader, mockImageComposer.composeImageView)
-//    }
-//}
+#Preview {
+    
+    NavigationStack {
+        let charactersViewModel = CharactersViewModel(repository: MockCharactersRepository())
+        
+        CharactersView(charactersViewModel: charactersViewModel,
+                       imageViewLoader: MockImageComposer().composeImageView)
+    }
+}
