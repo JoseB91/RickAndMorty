@@ -21,7 +21,11 @@ struct RickAndMortyApp: App {
         WindowGroup {
             CharactersView(charactersViewModel: composer.composeCharactersViewModel(),
                            imageViewLoader: composer.composeImageView)
+            .task {
+                try? await composer.validateCache()
+            }
                 //.environment(\.imageViewLoader, composer.composeImageView)
         }
+
     }
 }

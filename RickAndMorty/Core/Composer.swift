@@ -59,4 +59,8 @@ class Composer {
 
         return ImageView(imageViewModel: imageViewModel)
     }
+    
+    func validateCache() async throws {
+        try await localCharactersStorage.validateCache()
+    }
 }
