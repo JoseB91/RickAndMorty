@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CharactersView: View {
     @State var charactersViewModel: CharactersViewModel
-    @Environment(\.imageViewLoader) private var imageViewLoader
+    let imageViewLoader: (URL) -> ImageView
+    //@Environment(\.imageViewLoader) private var imageViewLoader
 
     var body: some View {
         ZStack {
@@ -21,7 +22,7 @@ struct CharactersView: View {
                     ForEach(charactersViewModel.characters) { character in
                         Button {
                         } label: {
-                            CharacterCardView(character: character)
+                            CharacterCardView(character: character, imageViewLoader: imageViewLoader)
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
@@ -44,13 +45,13 @@ struct CharactersView: View {
     }
 }
 
-#Preview {
-    
-    NavigationStack {
-        let mockImageComposer = MockImageComposer()
-        let charactersViewModel = CharactersViewModel(repository: MockCharactersRepository())
-        
-        CharactersView(charactersViewModel: charactersViewModel)
-            .environment(\.imageViewLoader, mockImageComposer.composeImageView)
-    }
-}
+//#Preview {
+//    
+//    NavigationStack {
+//        let mockImageComposer = MockImageComposer()
+//        let charactersViewModel = CharactersViewModel(repository: MockCharactersRepository())
+//        
+//        CharactersView(charactersViewModel: charactersViewModel)
+//            .environment(\.imageViewLoader, mockImageComposer.composeImageView)
+//    }
+//}

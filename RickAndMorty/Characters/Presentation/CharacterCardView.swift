@@ -9,15 +9,14 @@ import SwiftUI
 
 struct CharacterCardView: View {
     let character: Character
-    @Environment(\.imageViewLoader) private var imageViewLoader
-
+    let imageViewLoader: (URL) -> ImageView
+    //@Environment(\.imageViewLoader) private var imageViewLoader
+    
     var body: some View {
         HStack(spacing: 16) {
-
-            if let imageViewLoader{
-                imageViewLoader(character.image)
-                    .frame(width: 80, height: 80)
-            }
+            
+            imageViewLoader(character.image)
+                .frame(width: 80, height: 80)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(character.name)
@@ -34,10 +33,10 @@ struct CharacterCardView: View {
     }
 }
 
-#Preview {
-    let character = MockCharactersViewModel.mockCharacter()
-    let mockImageComposer = MockImageComposer()
-
-    CharacterCardView(character: character)
-        .environment(\.imageViewLoader, mockImageComposer.composeImageView)
-}
+//#Preview {
+//    let character = MockCharactersViewModel.mockCharacter()
+//    let mockImageComposer = MockImageComposer()
+//
+//    CharacterCardView(character: character)
+//        .environment(\.imageViewLoader, mockImageComposer.composeImageView)
+//}
