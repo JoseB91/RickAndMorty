@@ -17,7 +17,9 @@ public enum CharactersEndpoint {
             components.scheme = baseURL.scheme
             components.host = baseURL.host
             components.path = baseURL.path + "/character"
-            return components.url!
+            
+            guard let url = components.url else { return baseURL }
+            return url
         }
     }
 }
