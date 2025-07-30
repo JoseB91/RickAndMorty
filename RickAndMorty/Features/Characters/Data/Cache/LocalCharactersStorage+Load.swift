@@ -10,7 +10,7 @@ import Foundation
 extension LocalCharactersStorage {
     private struct FailedLoad: Error {}
     
-    public func load() async throws -> [Character] {
+    func load() async throws -> [Character] {
         if let cache = try await store.retrieve(), CachePolicy.validate(cache.timestamp, against: currentDate()) {
             return cache.characters.toModels()
         } else {

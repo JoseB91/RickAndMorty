@@ -7,24 +7,24 @@
 
 import Foundation
 
-public protocol ImageLoader {
+protocol ImageLoader {
     func loadImageData(from url: URL) async throws -> Data
 }
 
 extension LocalImageStorage: ImageLoader {
-    public enum LoadError: Error {
+    enum LoadError: Error {
         case failed
         case notFound
     }
     
-    public func loadImageData(from url: URL) async throws -> Data {
-            do {
-                if let imageData = try await store.retrieve(dataFor: url) {
-                    return imageData
-                }
-            } catch {
-                throw LoadError.failed
+    func loadImageData(from url: URL) async throws -> Data {
+        do {
+            if let imageData = try await store.retrieve(dataFor: url) {
+                return imageData
             }
+        } catch {
+            throw LoadError.failed
+        }
         throw LoadError.notFound
     }
 }

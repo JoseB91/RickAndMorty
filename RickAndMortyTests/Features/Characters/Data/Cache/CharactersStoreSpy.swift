@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import RickAndMorty
+@testable import RickAndMorty
 
-public class CharactersStoreSpy: CharactersStore {
+class CharactersStoreSpy: CharactersStore {
     
     enum ReceivedMessage: Equatable {
         case delete
@@ -24,7 +24,7 @@ public class CharactersStoreSpy: CharactersStore {
 
 
     // MARK: Delete
-    public func deleteCache() async throws {
+    func deleteCache() async throws {
         receivedMessages.append(.delete)
         try deletionResult?.get()
     }
@@ -38,7 +38,7 @@ public class CharactersStoreSpy: CharactersStore {
     }
     
     // MARK: Insert
-    public func insert(_ characters: [LocalCharacter], timestamp: Date) async throws {
+    func insert(_ characters: [LocalCharacter], timestamp: Date) async throws {
         receivedMessages.append(.insert(characters, timestamp))
         try insertionResult?.get()
     }
@@ -52,7 +52,7 @@ public class CharactersStoreSpy: CharactersStore {
     }
     
     // MARK: Retrieve
-    public func retrieve() async throws -> CachedCharacters? {
+    func retrieve() async throws -> CachedCharacters? {
         receivedMessages.append(.retrieve)
         return try retrievalResult?.get()
     }

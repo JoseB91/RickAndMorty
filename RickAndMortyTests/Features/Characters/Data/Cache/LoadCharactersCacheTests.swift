@@ -6,7 +6,7 @@
 //
 
 import Testing
-import RickAndMorty
+@testable import RickAndMorty
 import Foundation
 
 @Suite("Load Characters Cache Tests")

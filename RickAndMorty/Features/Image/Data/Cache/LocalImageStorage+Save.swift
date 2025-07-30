@@ -7,17 +7,17 @@
 
 import Foundation
 
-public protocol ImageCache {
+protocol ImageCache {
     func save(_ data: Data, for url: URL) async throws
 }
 
 
 extension LocalImageStorage: ImageCache {
-    public enum SaveError: Error {
+    enum SaveError: Error {
         case failed
     }
     
-    public func save(_ data: Data, for url: URL) async throws {
+    func save(_ data: Data, for url: URL) async throws {
         do {
             try await store.insert(data, for: url)
         } catch {

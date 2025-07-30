@@ -9,9 +9,9 @@ import SwiftData
 import Foundation
 
 @preconcurrency @Model
-public final class LocalCharacter: Sendable {
+final class LocalCharacter: Sendable {
     @Attribute(.unique)
-    public var id: Int
+    var id: Int
     
     var name: String
     var origin: String

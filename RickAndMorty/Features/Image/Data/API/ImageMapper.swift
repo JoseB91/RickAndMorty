@@ -7,8 +7,8 @@
 
 import Foundation
 
-public final class ImageMapper {
-    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> Data {
+final class ImageMapper {
+    static func map(_ data: Data, from response: HTTPURLResponse) throws -> Data {
         guard response.isOK, !data.isEmpty else {
             throw MapperError.unsuccessfullyResponse
         }

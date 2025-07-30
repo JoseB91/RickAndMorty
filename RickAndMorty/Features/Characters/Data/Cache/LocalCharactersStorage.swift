@@ -7,19 +7,19 @@
 
 import Foundation
 
-public typealias CachedCharacters = (characters: [LocalCharacter], timestamp: Date)
+typealias CachedCharacters = (characters: [LocalCharacter], timestamp: Date)
 
-public protocol CharactersStore {
+protocol CharactersStore {
     func deleteCache() async throws
     func insert(_ characters: [LocalCharacter], timestamp: Date) async throws
     func retrieve() async throws -> CachedCharacters?
 }
 
-public final class LocalCharactersStorage {
+final class LocalCharactersStorage {
     let store: CharactersStore
     let currentDate: () -> Date
     
-    public init(store: CharactersStore, currentDate: @escaping () -> Date) {
+    init(store: CharactersStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
     }

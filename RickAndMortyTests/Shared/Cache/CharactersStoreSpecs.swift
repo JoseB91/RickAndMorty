@@ -18,7 +18,7 @@ protocol CharactersStoreSpecs {
 
 import Foundation
 import Testing
-import RickAndMorty
+@testable import RickAndMorty
 
 extension CharactersStoreSpecs {
     func assertThatInsertDeliversNoErrorOnEmptyCache(on sut: CharactersStore, sourceLocation: SourceLocation = #_sourceLocation) async {

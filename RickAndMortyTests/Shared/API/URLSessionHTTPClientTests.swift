@@ -7,7 +7,7 @@
 
 import Testing
 import Foundation
-import RickAndMorty
+@testable import RickAndMorty
 
 @Suite("URLSessionHTTPClient Tests")
 struct URLSessionHTTPClientTests : ~Copyable{
@@ -24,8 +24,6 @@ struct URLSessionHTTPClientTests : ~Copyable{
     func getFromURL_performsGETRequestWithURL() async throws {
         let sut = makeSUT()
         let url = anyURL()
-        
-        URLProtocolStub.request = nil
         
         _ = try? await sut.get(from: url)
 

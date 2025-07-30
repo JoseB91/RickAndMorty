@@ -9,7 +9,7 @@ import SwiftData
 import Foundation
 
 @ModelActor
-public actor SwiftDataStore {
+actor SwiftDataStore {
     init(isStoredInMemoryOnly: Bool = false) throws {
         let schema = Schema([
             LocalCharacter.self,

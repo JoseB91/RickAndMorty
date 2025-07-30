@@ -7,19 +7,18 @@
 
 import Foundation
 
-public protocol HTTPClient {
+protocol HTTPClient {
     func get(from url: URL) async throws -> (Data, HTTPURLResponse)
 }
 
-public final class URLSessionHTTPClient: HTTPClient {
+final class URLSessionHTTPClient: HTTPClient {
     private let session: URLSession
     
-    public init(session: URLSession) {
+    init(session: URLSession) {
         self.session = session
     }
-            
-    public func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
-        
+    
+    func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
         do {
             let (data, response) = try await session.data(from: url)
             

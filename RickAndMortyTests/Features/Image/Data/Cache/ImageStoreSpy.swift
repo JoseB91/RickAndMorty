@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import RickAndMorty
+@testable import RickAndMorty
 
-public class ImageStoreSpy: ImageStore {
+class ImageStoreSpy: ImageStore {
 
     enum ReceivedMessage: Equatable {
         case insert(Data, URL)
@@ -22,7 +22,7 @@ public class ImageStoreSpy: ImageStore {
 
     
     // MARK: Insert
-    public func insert(_ data: Data, for url: URL) async throws {
+    func insert(_ data: Data, for url: URL) async throws {
         receivedMessages.append(.insert(data, url))
         try insertionResult?.get()
     }
@@ -36,7 +36,7 @@ public class ImageStoreSpy: ImageStore {
     }
     
     // MARK: Retrieve
-    public func retrieve(dataFor url: URL) async throws -> Data? {
+    func retrieve(dataFor url: URL) async throws -> Data? {
         receivedMessages.append(.retrieve)
         return try retrievalResult?.get()
     }

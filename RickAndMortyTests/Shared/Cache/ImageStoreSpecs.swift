@@ -14,7 +14,7 @@ protocol ImageStoreSpecs {
 
 import Foundation
 import Testing
-import RickAndMorty
+@testable import RickAndMorty
 
 extension ImageStoreSpecs {
     

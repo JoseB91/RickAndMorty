@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import RickAndMorty
+@testable import RickAndMorty
 
 class CharactersEndpointXCTests: XCTestCase {
     

@@ -9,7 +9,7 @@ import SwiftData
 import Foundation
 
 @Model
-public final class LocalCache {
+final class LocalCache {
     var timestamp: Date
 
     @Relationship(deleteRule: .cascade)

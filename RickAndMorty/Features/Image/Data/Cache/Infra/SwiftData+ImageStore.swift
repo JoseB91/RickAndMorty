@@ -10,14 +10,14 @@ import SwiftData
 
 extension SwiftDataStore: ImageStore {
     
-    public func insert(_ data: Data, for url: URL) async throws {
+    func insert(_ data: Data, for url: URL) async throws {
         if let localCharacter = try LocalCharacter.getFirst(with: url, in: modelContext) {
             localCharacter.data = data
         }
         try modelContext.save()
     }
 
-    public func retrieve(dataFor url: URL) async throws -> Data?  {
+    func retrieve(dataFor url: URL) async throws -> Data?  {
         return try LocalCharacter.getImageData(with: url, in: modelContext)
     }
 }

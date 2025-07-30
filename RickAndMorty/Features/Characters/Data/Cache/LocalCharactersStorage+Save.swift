@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol CharactersCache {
+protocol CharactersCache {
     func save(_ characters: [Character]) async throws
 }
 
 extension LocalCharactersStorage: CharactersCache {
-    public func save(_ characters: [Character]) async throws {
+    func save(_ characters: [Character]) async throws {
         do {
             try await store.insert(characters.toLocal(), timestamp: currentDate())
         } catch {

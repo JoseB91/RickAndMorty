@@ -7,10 +7,10 @@
 
 import Foundation
 
-public enum CharactersEndpoint {
+enum CharactersEndpoint {
     case getCharacters
     
-    public func url(baseURL: URL) -> URL {
+    func url(baseURL: URL) -> URL {
         switch self {
         case .getCharacters:
             var components = URLComponents()

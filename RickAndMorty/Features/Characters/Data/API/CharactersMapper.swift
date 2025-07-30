@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class CharactersMapper {
+final class CharactersMapper {
     
     private struct Root: Decodable {
         let info: InfoCodable
@@ -32,7 +32,7 @@ public final class CharactersMapper {
         }
     }
     
-    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Character] {
+    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Character] {
         guard response.isOK else {
             throw MapperError.unsuccessfullyResponse
         }

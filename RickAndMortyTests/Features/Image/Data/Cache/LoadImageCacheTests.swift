@@ -7,7 +7,7 @@
 
 import Foundation
 import Testing
-import RickAndMorty
+@testable import RickAndMorty
 
 @Suite("Load Image Cache Tests")
 struct LoadImageCacheTests {

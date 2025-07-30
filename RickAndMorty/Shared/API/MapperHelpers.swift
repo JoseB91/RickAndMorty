@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum MapperError: Error {
+enum MapperError: Error {
     case unsuccessfullyResponse
 }
 
