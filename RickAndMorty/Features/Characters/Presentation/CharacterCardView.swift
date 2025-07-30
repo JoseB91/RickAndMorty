@@ -10,7 +10,6 @@ import SwiftUI
 struct CharacterCardView: View {
     let character: Character
     let imageViewLoader: (URL) -> ImageView
-    //@Environment(\.imageViewLoader) private var imageViewLoader
     
     var body: some View {
         HStack(spacing: 16) {

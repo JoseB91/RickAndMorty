@@ -5,7 +5,7 @@
 //  Created by José Briones on 3/7/25.
 //
 
-import SwiftUI
+import Foundation
 
 @Observable
 final class ImageViewModel {
@@ -24,29 +24,5 @@ final class ImageViewModel {
         defer { isLoading = false }
         
         data = try? await repository.loadImage()
-    }
-    
-}
-
-struct MockImageRepository: ImageRepository {
-    func loadImage() async throws -> Data {
-        Data()
-    }
-}
-
-struct MockImageComposer {
-    func composeImageView(with url: URL) -> ImageView {
-        let mockRepository = MockImageRepository()
-        let mockViewModel = ImageViewModel(repository: mockRepository)
-        return ImageView(imageViewModel: mockViewModel)
-    }
-}
-
-extension Image {
-    static func load(from data: Data?, fallback: String = "photo") -> Image {
-        guard let data, let uiImage = UIImage(data: data) else {
-            return Image(systemName: fallback)
-        }
-        return Image(uiImage: uiImage)
     }
 }
