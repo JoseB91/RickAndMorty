@@ -20,14 +20,18 @@ public final class URLSessionHTTPClient: HTTPClient {
             
     public func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
         
-        guard let (data, response) = try? await session.data(from: url) else {
-            throw URLError(.cannotLoadFromNetwork)
+        do {
+            let (data, response) = try await session.data(from: url)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw URLError(.badServerResponse)
+            }
+            
+            return (data, httpResponse)
+        } catch let urlError as URLError {
+            throw urlError
+        } catch {
+            throw URLError(.unknown, userInfo: [NSUnderlyingErrorKey: error])
         }
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw URLError(.badServerResponse)
-        }
-        
-        return (data, httpResponse)
     }
 }
