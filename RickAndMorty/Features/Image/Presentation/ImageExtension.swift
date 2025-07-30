@@ -1,5 +1,5 @@
 //
-//  ImageHelper.swift
+//  ImageExtension.swift
 //  RickAndMorty
 //
 //  Created by José Briones on 30/7/25.
