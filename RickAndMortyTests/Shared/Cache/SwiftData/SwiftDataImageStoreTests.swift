@@ -13,27 +13,27 @@ import Testing
 struct SwiftDataImageStoreTests: ImageStoreSpecs {
     
     @Test("Retrieve image data delivers last inserted value")
-    func test_retrieveImageData_deliversLastInsertedValue() async throws {
+    func retrieveImageData_deliversLastInsertedValue() async throws {
         //TODO: Review
 //        let sut = try await makeSUT()
 //        await assertThatRetrieveImageDataDeliversLastInsertedValueForURL(on: sut)
     }
     
     @Test("Retrieve image data delivers found data when there is a stored image data matching URL")
-    func test_retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() async throws {
+    func retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() async throws {
         //TODO: Review
 //        let sut = try await makeSUT()
 //        await assertThatRetrieveImageDataDeliversFoundDataWhenThereIsAStoredImageDataMatchingURL(on: sut)
     }
     
     @Test("Retrieve image data delivers not found when empty")
-    func test_retrieveImageData_deliversNotFoundWhenEmpty() async throws {
+    func retrieveImageData_deliversNotFoundWhenEmpty() async throws {
         let sut = try await makeSUT()
         await assertThatRetrieveImageDataDeliversNotFoundOnEmptyCache(on: sut)
     }
     
     @Test("Retreive image data delivers not found when stored data URL does not match")
-    func test_retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() async throws {
+    func retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() async throws {
         let sut = try await makeSUT()
         await assertThatRetrieveImageDataDeliversNotFoundWhenStoredDataURLDoesNotMatch(on: sut)
     }

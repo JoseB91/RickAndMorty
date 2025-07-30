@@ -24,7 +24,6 @@ struct RickAndMortyApp: App {
             .task {
                 try? await composer.validateCache()
             }
-                //.environment(\.imageViewLoader, composer.composeImageView)
         }
 
     }

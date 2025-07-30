@@ -7,8 +7,7 @@
 
 import Foundation
 
-//TODO: change to struct
-final class CachePolicy {
+struct CachePolicy {
     private init() {}
     
     private static let calendar = Calendar(identifier: .gregorian)

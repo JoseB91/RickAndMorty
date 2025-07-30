@@ -24,14 +24,13 @@ final class CharactersViewModel {
     @MainActor
     func loadCharacters() async {
         isLoading = true
+        defer { isLoading = false }
         
         do {
             characters = try await repository.loadCharacters()
         } catch {
             errorMessage = ErrorModel(message: "Failed to load characters: \(error.localizedDescription)")
         }
-        
-        isLoading = false
     }
 }
 

@@ -12,7 +12,7 @@ final class ImageViewModel {
     private let repository: ImageRepository
     
     var isLoading = false
-    var data = Data()
+    var data: Data?
     
     init(repository: ImageRepository) {
         self.repository = repository
@@ -21,14 +21,9 @@ final class ImageViewModel {
     @MainActor
     func loadImage() async {
         isLoading = true
+        defer { isLoading = false }
         
-        do {
-            data = try await repository.loadImage()
-        } catch {
-            // Error handled by fallback of Image.load
-        }
-        
-        isLoading = false
+        data = try? await repository.loadImage()
     }
     
 }
@@ -48,8 +43,8 @@ struct MockImageComposer {
 }
 
 extension Image {
-    static func load(from data: Data, fallback: String = "photo") -> Image {
-        guard let uiImage = UIImage(data: data) else {
+    static func load(from data: Data?, fallback: String = "photo") -> Image {
+        guard let data, let uiImage = UIImage(data: data) else {
             return Image(systemName: fallback)
         }
         return Image(uiImage: uiImage)

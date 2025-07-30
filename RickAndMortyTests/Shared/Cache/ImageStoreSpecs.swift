@@ -5,12 +5,11 @@
 //  Created by José Briones on 8/7/25.
 //
 
-//TODO: Analyze naming of methods, delete test of specs
 protocol ImageStoreSpecs {
-    func test_retrieveImageData_deliversNotFoundWhenEmpty() async throws
-    func test_retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() async throws
-    func test_retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() async throws
-    func test_retrieveImageData_deliversLastInsertedValue() async throws
+    func retrieveImageData_deliversNotFoundWhenEmpty() async throws
+    func retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() async throws
+    func retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() async throws
+    func retrieveImageData_deliversLastInsertedValue() async throws
 }
 
 import Foundation

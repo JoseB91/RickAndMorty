@@ -13,25 +13,25 @@ import Testing
 struct InMemoryImageStoreTests: ImageStoreSpecs {
     
     @Test("Retrieve image data delivers last inserted value")
-    func test_retrieveImageData_deliversLastInsertedValue() async throws {
+    func retrieveImageData_deliversLastInsertedValue() async throws {
         let sut = makeSUT()
         await assertThatRetrieveImageDataDeliversLastInsertedValueForURL(on: sut)
     }
     
     @Test("Retrieve image data delivers found data when there is a stored image data matching URL")
-    func test_retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() async throws {
+    func retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() async throws {
         let sut = makeSUT()
         await assertThatRetrieveImageDataDeliversFoundDataWhenThereIsAStoredImageDataMatchingURL(on: sut)
     }
     
     @Test("Retrieve image data delivers not found when empty")
-    func test_retrieveImageData_deliversNotFoundWhenEmpty() async throws {
+    func retrieveImageData_deliversNotFoundWhenEmpty() async throws {
         let sut = makeSUT()
         await assertThatRetrieveImageDataDeliversNotFoundOnEmptyCache(on: sut)
     }
     
     @Test("Retreive image data delivers not found when stored data URL does not match")
-    func test_retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() async throws {
+    func retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() async throws {
         let sut = makeSUT()
         await assertThatRetrieveImageDataDeliversNotFoundWhenStoredDataURLDoesNotMatch(on: sut)
     }

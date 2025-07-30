@@ -6,14 +6,14 @@
 //
 
 protocol CharactersStoreSpecs {
-    func test_insert_deliversNoErrorOnEmptyCache() async throws
-    func test_insert_deliversNoErrorOnNonEmptyCache() async throws
-    func test_insert_doNotSaveOnNonEmptyCache() async throws
+    func insert_deliversNoErrorOnEmptyCache() async throws
+    func insert_deliversNoErrorOnNonEmptyCache() async throws
+    func insert_doNotSaveOnNonEmptyCache() async throws
     
-    func test_delete_deliversNoErrorOnEmptyCache() async throws
-    func test_delete_hasNoSideEffectsOnEmptyCache() async throws
-    func test_delete_deliversNoErrorOnNonEmptyCache() async throws
-    func test_delete_emptiesPreviouslyInsertedCache() async throws
+    func delete_deliversNoErrorOnEmptyCache() async throws
+    func delete_hasNoSideEffectsOnEmptyCache() async throws
+    func delete_deliversNoErrorOnNonEmptyCache() async throws
+    func delete_emptiesPreviouslyInsertedCache() async throws
 }
 
 import Foundation

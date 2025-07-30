@@ -14,21 +14,21 @@ import SwiftData
 struct SwiftDataCharacterStoreTests: CharactersStoreSpecs {
     
     @Test("Insert delivers no empty cache")
-    func test_insert_deliversNoErrorOnEmptyCache() async throws {
+    func insert_deliversNoErrorOnEmptyCache() async throws {
         let sut = try makeSUT()
 
         await assertThatInsertDeliversNoErrorOnEmptyCache(on: sut)
     }
 
     @Test("Insert delivers no error on non empty cache")
-    func test_insert_deliversNoErrorOnNonEmptyCache() async throws {
+    func insert_deliversNoErrorOnNonEmptyCache() async throws {
         let sut = try makeSUT()
 
         await assertThatInsertDeliversNoErrorOnNonEmptyCache(on: sut)
     }
     
     @Test("Insert do not save on non empty cache")
-    func test_insert_doNotSaveOnNonEmptyCache() async throws {
+    func insert_doNotSaveOnNonEmptyCache() async throws {
         //TODO: Review this test
 //        let sut = makeSUT()
 //
@@ -36,28 +36,28 @@ struct SwiftDataCharacterStoreTests: CharactersStoreSpecs {
     }
     
     @Test("Delete delivers no error on empty cache")
-    func test_delete_deliversNoErrorOnEmptyCache() async throws {
+    func delete_deliversNoErrorOnEmptyCache() async throws {
         let sut = try makeSUT()
 
         await assertThatDeleteDeliversNoErrorOnEmptyCache(on: sut)
     }
 
     @Test("Delete has no side effects on empty cache")
-    func test_delete_hasNoSideEffectsOnEmptyCache() async throws {
+    func delete_hasNoSideEffectsOnEmptyCache() async throws {
         let sut = try makeSUT()
 
         await assertThatDeleteHasNoSideEffectsOnEmptyCache(on: sut)
     }
 
     @Test("Delete delivers no error on non empty cache")
-    func test_delete_deliversNoErrorOnNonEmptyCache() async throws {
+    func delete_deliversNoErrorOnNonEmptyCache() async throws {
         let sut = try makeSUT()
 
         await assertThatDeleteDeliversNoErrorOnNonEmptyCache(on: sut)
     }
 
     @Test("Delete empties previously inserted cache")
-    func test_delete_emptiesPreviouslyInsertedCache() async throws {
+    func delete_emptiesPreviouslyInsertedCache() async throws {
         let sut = try makeSUT()
 
         await assertThatDeleteEmptiesPreviouslyInsertedCache(on: sut)

@@ -12,8 +12,8 @@ import RickAndMorty
 @Suite("CharactersEndpoint Tests")
 struct CharactersEndpointTests {
     
-    @Test()
-    func getCharactersEndpointURL() {
+    @Test("Characters endpoint URL has the correct components")
+    func charactersEndpointURL_hasCorrectComponents() {
         // Arrange
         let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
         
@@ -31,7 +31,7 @@ struct CharactersEndpointTests {
         ("host", "rickandmortyapi.com"),
         ("path", "/api/character")
     ])
-    func getURLComponents(component: String, expected: String) {
+    func charactersEndpointURLComponents(component: String, expected: String) {
         let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
         let url = CharactersEndpoint.getCharacters.url(baseURL: baseURL)
         
@@ -43,3 +43,5 @@ struct CharactersEndpointTests {
         }
     }
 }
+
+
