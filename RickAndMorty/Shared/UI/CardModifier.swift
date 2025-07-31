@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct CardModifier: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme
+    
     func body(content: Content) -> some View {
         content
             .padding()
-            .background(Color.white)
+            .background(colorScheme == .dark ? Color(UIColor.systemGray4) : .white)
             .cornerRadius(12)
             .shadow(radius: 4)
     }
