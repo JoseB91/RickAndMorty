@@ -11,10 +11,10 @@ import SwiftData
 //@main
 struct RickAndMortyApp: App {
     
-    private let composer: Composer
+    private let composer: DependencyContainer
     
     init() {
-        self.composer = Composer.makeComposer()
+        self.composer = DependencyContainer.make()
     }
     
     var body: some Scene {

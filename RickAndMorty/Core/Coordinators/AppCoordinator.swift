@@ -15,19 +15,19 @@ enum AppRoute {
 final class AppCoordinator {
     var currentRoute: AppRoute = .characters
 
-    private let composer: Composer
+    private let composer: DependencyContainer
     private(set) var charactersCoordinator: CharactersCoordinator
 
     // Just init with composer parameter
     // Inits charactersCoordinator with composer as well
-    init(composer: Composer) {
+    init(composer: DependencyContainer) {
         self.composer = composer
         self.charactersCoordinator = CharactersCoordinator(composer: composer)
     }
 
     // To be used on the init of App
     static func make() -> AppCoordinator {
-        AppCoordinator(composer: Composer.makeComposer())
+        AppCoordinator(composer: DependencyContainer.make())
     }
 
     func validateCache() async throws {

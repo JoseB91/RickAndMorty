@@ -14,7 +14,7 @@ final class CharactersViewModel {
     var isLoading = false
     var errorMessage: ErrorModel? = nil
     
-    private let repository: CharactersRepository
+    @ObservationIgnored private let repository: CharactersRepository
     
     init(repository: CharactersRepository) {
         self.repository = repository

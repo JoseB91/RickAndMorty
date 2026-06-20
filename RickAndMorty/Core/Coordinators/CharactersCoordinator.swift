@@ -16,11 +16,11 @@ enum CharactersRoute: Hashable {
 final class CharactersCoordinator {
     // declare and inits path
     var path: [CharactersRoute] = []
+    
     @ObservationIgnored let charactersViewModel: CharactersViewModel
+    @ObservationIgnored private let composer: DependencyContainer
 
-    @ObservationIgnored private let composer: Composer
-
-    init(composer: Composer) {
+    init(composer: DependencyContainer) {
         self.composer = composer
         self.charactersViewModel = composer.composeCharactersViewModel()
     }

@@ -1,5 +1,5 @@
 //
-//  Composer.swift
+//  DependencyContainer.swift
 //  RickAndMorty
 //
 //  Created by José Briones on 26/6/25.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-final class Composer {
+final class DependencyContainer {
     private let baseURL: URL
     private let httpClient: URLSessionHTTPClient
     private let localCharactersStorage: LocalCharactersStorage
@@ -21,14 +21,14 @@ final class Composer {
         self.localImageStorage = localImageStorage
     }
     
-    static func makeComposer() -> Composer {
+    static func make() -> DependencyContainer {
         
         let baseURL = URL(string: "https://rickandmortyapi.com/api/")!
         let httpClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let store = makeStore()
         let localCharactersStorage = LocalCharactersStorage(store: store, currentDate: Date.init)
         let localImageStorage = LocalImageStorage(store: store)
-        return Composer(baseURL: baseURL,
+        return DependencyContainer(baseURL: baseURL,
                         httpClient: httpClient,
                         localCharactersStorage: localCharactersStorage,
                         localImageStorage: localImageStorage)
