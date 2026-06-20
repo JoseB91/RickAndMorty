@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class InMemoryStore {
+actor InMemoryStore {
     var charactersCache: CachedCharacters?
     var imageData = NSCache<NSURL, NSData>()
 }
