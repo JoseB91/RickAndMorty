@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-@main
+//@main
 struct RickAndMortyApp: App {
     
     private let composer: Composer

@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct CharactersView: View {
-    @State var charactersViewModel: CharactersViewModel
+    @Bindable var charactersViewModel: CharactersViewModel
     let imageViewLoader: (URL) -> ImageView
-    
+    var onSelectCharacter: ((Character) -> Void)? = nil
+
     var body: some View {
         ZStack {
             if charactersViewModel.isLoading {
@@ -20,6 +21,7 @@ struct CharactersView: View {
                 ScrollView {
                     ForEach(charactersViewModel.characters) { character in
                         Button {
+                            onSelectCharacter?(character)
                         } label: {
                             CharacterCardView(character: character, imageViewLoader: imageViewLoader)
                         }

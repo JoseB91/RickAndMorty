@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-class Composer {
+final class Composer {
     private let baseURL: URL
     private let httpClient: URLSessionHTTPClient
     private let localCharactersStorage: LocalCharactersStorage
