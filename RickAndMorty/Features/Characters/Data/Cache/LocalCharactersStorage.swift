@@ -7,11 +7,14 @@
 
 import Foundation
 
-typealias CachedCharacters = (characters: [LocalCharacter], timestamp: Date)
+struct CachedCharacters: @unchecked Sendable {
+    let characters: [LocalCharacter]
+    let timestamp: Date
+}
 
 protocol CharactersStore {
     func deleteCache() async throws
-    func insert(_ characters: [LocalCharacter], timestamp: Date) async throws
+    func insert(_ characters: sending [LocalCharacter], timestamp: Date) async throws
     func retrieve() async throws -> CachedCharacters?
 }
 

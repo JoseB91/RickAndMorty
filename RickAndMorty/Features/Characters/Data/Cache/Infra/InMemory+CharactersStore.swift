@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension InMemoryStore: CharactersStore {
+extension InMemoryStore: @preconcurrency CharactersStore {
     func retrieve() async throws -> CachedCharacters? {
         charactersCache
     }

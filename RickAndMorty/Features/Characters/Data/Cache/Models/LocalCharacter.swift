@@ -8,8 +8,8 @@
 import SwiftData
 import Foundation
 
-@preconcurrency @Model
-final class LocalCharacter: Sendable {
+@Model
+final class LocalCharacter: @unchecked Sendable {
     @Attribute(.unique)
     var id: Int
     
